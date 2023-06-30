@@ -21,6 +21,7 @@ public class TimezoneValidateFilter extends HttpFilter {
         if(timezoneParameter != null && !timezoneParameter.isEmpty()){
             if (!isValidTimezone(timezoneParameter)) {
                 resp.setStatus(400);
+                resp.setContentType("application/json");
                 resp.getWriter().write("{\"Error\": \"Invalid timezone\"}");
                 resp.getWriter().close();
             }
