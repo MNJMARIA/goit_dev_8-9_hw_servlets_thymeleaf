@@ -1,7 +1,5 @@
 package servlets;
 
-import web_filters.TimezoneValidateFilter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,13 +23,22 @@ public class TimeServlet extends HttpServlet {
         resp.setContentType("text/html; charset=utf-8");
         resp.getWriter().write("<br>TIME<br>");
 
+        String currentTime;
         String timezone = req.getParameter("timezone");
+        if (timezone != null && !timezone.isEmpty()) {
+            currentTime = LocalDateTime
+                    .now()
+                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        String currentTime = LocalDateTime
-                .now()
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            resp.getWriter().write(currentTime + " " + timezone);
+        } else {
+            currentTime = LocalDateTime
+                    .now()
+                    .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-        resp.getWriter().write(currentTime + " " + timezone);
+            timezone = "UTC";
+            resp.getWriter().write(currentTime + " " + timezone);
+        }
         resp.getWriter().close();
     }
 }
