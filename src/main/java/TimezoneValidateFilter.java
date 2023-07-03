@@ -26,7 +26,12 @@ public class TimezoneValidateFilter extends HttpFilter {
         chain.doFilter(req, resp); // Викликати ланцюжок фільтрів та сервлету
     }
     private boolean isValidTimezone(String timezone) {
-        TimeZone.getTimeZone(timezone);
-        return true;
+        String[] availableTimezones = TimeZone.getAvailableIDs();
+        for (String availableTimezone : availableTimezones) {
+            if (availableTimezone.equals(timezone)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
