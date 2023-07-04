@@ -29,7 +29,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf
-    implementation 'org.thymeleaf:thymeleaf:3.1.0.M2'
+    implementation 'org.thymeleaf:thymeleaf:3.1.1.RELEASE'
+
 }
 
 test {
